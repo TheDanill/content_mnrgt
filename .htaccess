@@ -1,0 +1,96 @@
+Options All -Indexes
+ErrorDocument 404 /app/init.php?action=404
+RewriteEngine On
+
+# Редиректы
+RewriteRule ^(index\.(html?|php[0-9]?))$ http://mypop.top/ [R=301,L]
+RewriteCond %{HTTP_HOST} ^(.*)\.mypop\.top$
+RewriteRule ^(.*)$ http://mypop.top/$1 [R=301,L]
+
+# Главная страница
+RewriteRule ^$ app/init.php?action=index&do=index [L,QSA]
+RewriteRule ^about/?$ app/init.php?action=index&do=about [L,QSA]
+RewriteRule ^privacy/?$ app/init.php?action=index&do=privacy [L,QSA]
+RewriteRule ^feedback/?$ app/init.php?action=index&do=feedback [L,QSA]
+RewriteRule ^help/?$ app/init.php?action=index&do=help [L,QSA]
+
+#Пользователь
+RewriteCond %{QUERY_STRING} ^id=?([0-9]+)$
+RewriteRule ^user/?$ http://mypop.top/id%1 [R=301,L,QSD]
+RewriteRule ^id([0-9]+)/?$ app/init.php?action=user&id=$1 [L,QSA]
+RewriteRule ^me/?$ app/init.php?action=user [L,QSA]
+RewriteRule ^me/edit/?$ app/init.php?action=user&do=settings [L,QSA]
+
+#Авторизации
+RewriteRule ^auth/?$ app/init.php?action=auth [L,QSA]
+RewriteRule ^auth/login?$ app/init.php?action=auth&do=login [L,QSA]
+RewriteRule ^auth/register?$ app/init.php?action=auth&do=register [L,QSA]
+RewriteRule ^vkauth/?$ app/init.php?action=vkauth [L,QSA]
+RewriteRule ^fbauth/?$ app/init.php?action=fbauth [L,QSA]
+RewriteRule ^instaauth/?$ app/init.php?action=instaauth [L,QSA]
+RewriteRule ^googleauth/?$ app/init.php?action=googleauth [L,QSA]
+RewriteRule ^twitterauth/?$ app/init.php?action=twitterauth [L,QSA]
+RewriteRule ^okauth/?$ app/init.php?action=okauth [L,QSA]
+RewriteRule ^mailauth/?$ app/init.php?action=mailauth [L,QSA]
+RewriteRule ^linkedauth/?$ app/init.php?action=linkedauth [L,QSA]
+RewriteRule ^weiboauth/?$ app/init.php?action=weiboauth [L,QSA]
+RewriteRule ^qzoneauth/?$ app/init.php?action=qzoneauth [L,QSA]
+RewriteRule ^logout/?$ app/init.php?action=auth&do=logout [L,QSA]
+
+#Рейтинг
+#RewriteRule ^rating/?$ app/init.php?action=rating [L,QSA]
+#RewriteRule ^rating/update/?$ app/init.php?action=rating&do=updateRating [L,QSA]
+#RewriteRule ^rating/calc/?$ app/init.php?action=rating&do=calculateRating [L,QSA]
+#RewriteRule ^rating/recalc/?$ app/init.php?action=rating&do=recalcAllUsers [L,QSA]
+RewriteRule ^rating/updateAll/?$ app/init.php?action=rating&do=updateAllUsers [L,QSA]
+#RewriteRule ^rating/recalcOneUser/?$ app/init.php?action=rating&do=recalcOneUser [L,QSA]
+
+#Комментарии и лайки/Дизлайки
+RewriteRule ^comment/?$ app/init.php?action=comment [L,QSA]
+RewriteRule ^comment/add/?$ app/init.php?action=comment&do=addComment [L,QSA]
+RewriteRule ^comment/remove/?$ app/init.php?action=comment&do=removeComment [L,QSA]
+RewriteRule ^comment/update/?$ app/init.php?action=comment&do=updateComment [L,QSA]
+RewriteRule ^comment/get/?$ app/init.php?action=comment&do=getComment [L,QSA]
+RewriteRule ^comment/addLike/?$ app/init.php?action=comment&do=addLike [L,QSA]
+RewriteRule ^comment/removeLike/?$ app/init.php?action=comment&do=removeLike [L,QSA]
+RewriteRule ^comments/get/?$ app/init.php?action=comments&do=getComments [L,QSA]
+RewriteRule ^comments/getLikes/?$ app/init.php?action=comments&do=getLikesDislikes [L,QSA]
+
+#Словари
+RewriteRule ^vocabulary/?$ app/init.php?action=vocabulars&do=vocabulars [L,QSA]
+RewriteRule ^vocabulary/add?$ app/init.php?action=vocabulars&do=addVocabulary [L,QSA]
+RewriteRule ^vocabulary/check?$ app/init.php?action=vocabulars&do=checkText [L,QSA]
+
+
+#Пользователи
+
+RewriteRule ^users/getUsersByRating?$ app/init.php?action=users&do=getUsersByRating [L,QSA]
+RewriteRule ^users/addALotOfUsers?$ app/init.php?action=users&do=addALotOfUsers [L,QSA]
+
+
+#Пользователь
+
+RewriteRule ^user/?$ app/init.php?action=user [L,QSA]
+RewriteRule ^user/favorite?$ app/init.php?action=user&do=favorite [L,QSA]
+RewriteRule ^user/settings?$ app/init.php?action=user&do=settings [L,QSA]
+
+#Города
+
+RewriteRule ^city/getCities?$ app/init.php?action=city&do=getCities [L,QSA]
+
+#Перевод
+
+RewriteRule ^lang/translate?$ app/init.php?action=lang&do=translate [L,QSA]
+
+#Лайки дислайки
+
+RewriteRule ^likes/addLike?$ app/init.php?action=userlikes&do=addLike [L,QSA]
+RewriteRule ^likes/removeLike?$ app/init.php?action=userlikes&do=removeLike [L,QSA]
+
+#Управление пользователями
+RewriteRule ^popadmin/users/?$ app/init.php?action=usersedit&do=show [L,QSA]
+RewriteRule ^popadmin/users/page/([0-9]+)/?$ app/init.php?action=usersedit&do=show&page=$1 [L,QSA]
+RewriteRule ^popadmin/users/(add|edit|ban|trash|remove)/?$ app/init.php?action=usersedit&do=$1 [L,QSA]
+
+#Отправка почты
+RewriteRule ^send/?$ app/utils/send.php [L,QSA]

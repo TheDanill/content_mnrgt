@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /*auth
+Disallow: /logout
+Disallow: /rating
+Disallow: /comment
+Disallow: /vocabulary
+Disallow: /city
+Disallow: /likes
+Disallow: /lang
+Host: mypop.top
